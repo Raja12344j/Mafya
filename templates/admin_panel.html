@@ -17,7 +17,7 @@
 </head>
 <body class="min-h-screen gradient-bg text-white">
   <div class="max-w-6xl mx-auto px-6 py-12">
-    <!-- Header -->
+
     <header class="text-center mb-12">
       <div class="inline-flex items-center justify-center w-20 h-20 rounded-full bg-white text-purple-600 shadow-xl mb-4 floaty">
         <i class="fa-solid fa-shield-halved text-3xl"></i>
@@ -45,15 +45,18 @@
     <!-- Pending Requests -->
     <section class="glass rounded-2xl p-6 mb-10 shadow-xl">
       <h2 class="text-2xl font-semibold mb-4"><i class="fa-solid fa-hourglass-half mr-2"></i> Pending Requests</h2>
+
       {% if pending_requests %}
         <ul class="space-y-3">
-          {% for user_id in pending_requests %}
+          {% for user in pending_requests %}
           <li class="flex justify-between items-center glass rounded-xl p-4 border border-white/10">
-            <span>{{ user_id }}</span>
+            <span>
+              {{ user.name if user.name else "Unknown" }} ({{ user.id }})
+            </span>
             <div class="space-x-2">
-              <a href="{{ url_for('approve_user', user_id=user_id) }}" 
+              <a href="{{ url_for('approve_user', user_id=user.id) }}" 
                  class="px-4 py-1 bg-green-600 hover:bg-green-700 rounded-lg text-sm">Approve</a>
-              <a href="{{ url_for('reject_user', user_id=user_id) }}" 
+              <a href="{{ url_for('reject_user', user_id=user.id) }}" 
                  class="px-4 py-1 bg-red-600 hover:bg-red-700 rounded-lg text-sm">Reject</a>
             </div>
           </li>
@@ -67,12 +70,15 @@
     <!-- Approved Users -->
     <section class="glass rounded-2xl p-6 shadow-xl">
       <h2 class="text-2xl font-semibold mb-4"><i class="fa-solid fa-users mr-2"></i> Approved Users</h2>
+
       {% if approved_users %}
         <ul class="space-y-3">
-          {% for user_id in approved_users %}
+          {% for user in approved_users %}
           <li class="flex justify-between items-center glass rounded-xl p-4 border border-white/10">
-            <span>{{ user_id }}</span>
-            <a href="{{ url_for('remove_user', user_id=user_id) }}" 
+            <span>
+              {{ user.name if user.name else "Unknown" }} ({{ user.id }})
+            </span>
+            <a href="{{ url_for('remove_user', user_id=user.id) }}" 
                class="px-4 py-1 bg-red-600 hover:bg-red-700 rounded-lg text-sm">Remove</a>
           </li>
           {% endfor %}
@@ -81,6 +87,7 @@
         <p class="text-blue-200">No approved users yet.</p>
       {% endif %}
     </section>
+
   </div>
 </body>
 </html>
