@@ -52,8 +52,8 @@ atexit.register(save_user_data)
 load_user_data()
 
 # Admin credentials
-ADMIN_USERNAME = 'USERNAME'
-ADMIN_PASSWORD = 'PASSWORD'
+ADMIN_USERNAME = 'Nobita xd'
+ADMIN_PASSWORD = 'Raja khan'
 
 # ----------------- Running Tasks -----------------
 running_tasks = {}  
